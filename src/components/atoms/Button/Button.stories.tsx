@@ -36,10 +36,11 @@ export const Secondary: Story = {
   },
 };
 
-export const Ghost: Story = {
-  args: {
-    children: 'Connect Wallet',
-    variant: 'ghost',
-    size: 'md',
-  },
-};
+export const UniswapPink: Story = {
+    args: {
+      children: 'Get started',
+      variant: 'uniswap',
+      size: 'md',
+    },
+  };
+  
