@@ -1,13 +1,18 @@
-
-import './App.css'
+import "./App.css";
+import { Card } from "./components/atoms/Card/Card";
+import { Hero } from "./components/organisms/HeroSection/HeroSection";
+import { SwapForm } from "./components/organisms/SwapForm/SwapForm";
+import { SwapPageLayout } from "./components/templates/SwapPageLayout/SwapPageLayout";
 
 function App() {
-
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-r from-pink-500 to-yellow-500 text-white">
-      <h1 className="text-4xl font-bold">✅ Tailwind is working!</h1>
-    </div>
-  )
+    <SwapPageLayout>
+        <Hero />
+        <Card>
+          <SwapForm />
+        </Card>
+    </SwapPageLayout>
+  );
 }
 
-export default App
+export default App;
