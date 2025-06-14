@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-type Variant = 'heading1' | 'title' | 'label' | 'caption';
+type Variant = 'heading1' | 'title' | 'label' | 'caption' | 'subtle';
 
 type TypographyProps = {
   children: React.ReactNode;
@@ -14,6 +14,7 @@ const baseStyles: Record<Variant, string> = {
   title: 'text-2xl font-semibold text-black',
   label: 'text-sm font-medium text-gray-700',
   caption: 'text-xs text-gray-400',
+  subtle: 'text-sm text-gray-400',
 };
 
 export const Typography = ({
