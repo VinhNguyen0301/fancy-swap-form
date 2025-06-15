@@ -40,7 +40,7 @@ export const UniswapPink: Story = {
     args: {
       children: 'Get started',
       variant: 'uniswap',
-      size: 'md',
+      size: 'lg',
     },
   };
   

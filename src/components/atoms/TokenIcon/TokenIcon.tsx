@@ -14,7 +14,7 @@ export const TokenIcon = ({
 }: TokenIconProps) => {
   return (
     <img
-      src={`/assets/tokens/${symbol}.svg`}
+      src={`/assets/tokens/ETH.svg`}
       alt={symbol}
       width={size}
       height={size}
