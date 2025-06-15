@@ -14,13 +14,12 @@ const dummyTokens: Token[] = [
 export const SwapForm = () => {
   const [sellToken, setSellToken] = useState<Token>(dummyTokens[0]);
   const [buyToken, setBuyToken] = useState<Token | null>(null);
-  const [sellAmount, setSellAmount] = useState("");
-  const [buyAmount, setBuyAmount] = useState("");
-  const [usdValue, setUsdValue] = useState("$0.00");
+  const [sellAmount, setSellAmount] = useState("11.25");
+  const [buyAmount, setBuyAmount] = useState("20");
+  const [usdValue, setUsdValue] = useState("1000.00");
 
   return (
-    // <div className="bg-white rounded-3xl p-6 shadow-lg w-[60%] max-w-2xl mx-auto space-y-4">
-    <Card>
+    <Card className="p-[8px]">
       <SwapInputPanel
         label="Sell"
         token={sellToken}

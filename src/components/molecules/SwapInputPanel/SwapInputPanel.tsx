@@ -4,6 +4,7 @@ import { TokenSelector } from '../TokenSelector/TokenSelector';
 import { Typography } from '../../atoms/Typography/Typography';
 import { InputAmount } from '../../atoms/InputAmount/InputAmount';
 import { Token } from '../../../types/token';
+import { Card } from '@/components/atoms/Card/Card';
 
 type Props = {
   label: string; // "Sell" | "Buy"
@@ -25,7 +26,7 @@ export const SwapInputPanel = ({
   onTokenChange,
 }: Props) => {
   return (
-    <div className="flex flex-col gap-2 p-4 bg-white rounded-2xl shadow-sm">
+    <Card className='p-[16px] bg-[#FFFFFF]'>
       <Typography variant="label">{label}</Typography>
 
       <div className="flex justify-between items-center">
@@ -38,8 +39,8 @@ export const SwapInputPanel = ({
       </div>
 
       {usdValue && (
-        <Typography variant="subtle">${usdValue}</Typography>
+        <Typography variant="subtle" className='text-sm text-gray-400 mt-1 text-[#131313A0]'>${usdValue}</Typography>
       )}
-    </div>
+    </Card>
   );
 };

@@ -19,7 +19,7 @@ export const Default: Story = {
 
 export const WithValue: Story = {
   args: {
-    value: '1.25',
+    value: '11.25',
     usdValue: '$4,291.25',
   },
 };

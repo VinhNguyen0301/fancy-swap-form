@@ -22,7 +22,7 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
     <div className="relative w-max">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 bg-[white] text-[#ff007a] px-4 py-2 rounded-xl font-semibold hover:bg-[#fac7f0] border-0 rounded-[999999px] pt-[2px] pb-[2px]"
+        className="flex items-center gap-2 bg-[white] text-[#ff007a] px-4 py-2 rounded-xl font-semibold hover:bg-[#fac7f0] rounded-[999999px] pt-[2px] pb-[2px] border border-[#dadee2]"
       >
         <TokenIcon symbol={selected.symbol} size={28} />
         <span className='ml-[6px] text-[16px] text-[#131313]'>

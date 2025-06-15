@@ -17,7 +17,7 @@ export const Default: Story = {
 
 export const WithCustomPadding: Story = {
   args: {
-    className: 'p-8',
+    className: 'p-[16px]',
     children: <div className="text-center text-black">Card with extra padding</div>,
   },
 };
