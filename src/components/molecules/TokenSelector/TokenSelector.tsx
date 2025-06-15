@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TokenIcon } from '../../atoms/TokenIcon/TokenIcon';
 import { Typography } from '../../atoms/Typography/Typography';
 import clsx from 'clsx';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 
 export type Token = {
   symbol: string;
@@ -21,15 +22,15 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
     <div className="relative w-max">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 bg-[#fdd6f4] text-[#ff007a] px-4 py-2 rounded-xl font-semibold hover:bg-[#fac7f0]"
+        className="flex items-center gap-2 bg-[white] text-[#ff007a] px-4 py-2 rounded-xl font-semibold hover:bg-[#fac7f0] border-0 rounded-[999999px] pt-[2px] pb-[2px]"
       >
-        <TokenIcon symbol={selected.symbol} size={20} />
+        <TokenIcon symbol={selected.symbol} size={28} />
+        <span className='ml-[6px] text-[16px] text-[#131313]'>
         <Typography variant="label">{selected.symbol}</Typography>
-        <svg className="w-4 h-4 text-[#ff007a]" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M7 7l3 3 3-3" />
-        </svg>
+        </span>
+        <ChevronDownIcon className="w-[20px] h-[20px] text-[gray] ml-[4px]" />
       </button>
-
+{/* 
       {open && (
         <div className="absolute top-full mt-2 z-10 w-48 bg-white rounded-lg shadow-lg border">
           {tokenList.map((token) => (
@@ -48,7 +49,7 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
             </button>
           ))}
         </div>
-      )}
+      )} */}
     </div>
   );
 };
