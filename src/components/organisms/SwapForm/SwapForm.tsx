@@ -7,6 +7,7 @@ import { Card } from "@/components/atoms/Card/Card";
 import { usePrices } from "@/hooks/usePrices";
 import { calculateBuyAmount } from "@/utils/calculate";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
+import { useTokenList } from '@/hooks/useTokenList';
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -14,6 +15,8 @@ const dummyTokens: Token[] = [
 ];
 
 export const SwapForm = () => {
+  const { tokens: tokenList, isLoading: isLoadingTokenList } = useTokenList();
+  console.log('tokenList::', tokenList)
   const [sellToken, setSellToken] = useState<Token>(dummyTokens[0]);
   const [buyToken, setBuyToken] = useState<Token>(dummyTokens[1]);
   const [sellAmount, setSellAmount] = useState("1");
@@ -48,7 +51,7 @@ export const SwapForm = () => {
       <SwapInputPanel
         label="Sell"
         token={sellToken}
-        tokenList={dummyTokens}
+        tokenList={tokenList}
         amount={sellAmount}
         onTokenChange={setSellToken}
         onAmountChange={setSellAmount}
@@ -68,7 +71,7 @@ export const SwapForm = () => {
       <SwapInputPanel
         label="Buy"
         token={buyToken}
-        tokenList={dummyTokens}
+        tokenList={tokenList}
         amount={buyAmount}
         onTokenChange={setBuyToken}
         onAmountChange={setBuyAmount}
