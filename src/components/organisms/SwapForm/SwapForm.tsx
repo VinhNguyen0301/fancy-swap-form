@@ -5,6 +5,7 @@ import { Button } from "../../atoms/Button/Button";
 import { Divider } from "../../atoms/Divider/Divider";
 import type { Token } from "../../../types/token";
 import { Card } from "@/components/atoms/Card/Card";
+import { usePrices } from "@/hooks/usePrices";
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -12,11 +13,15 @@ const dummyTokens: Token[] = [
 ];
 
 export const SwapForm = () => {
+  const { getPrice, isLoading } = usePrices();
+
   const [sellToken, setSellToken] = useState<Token>(dummyTokens[0]);
-  const [buyToken, setBuyToken] = useState<Token | null>(null);
-  const [sellAmount, setSellAmount] = useState("11.25");
+  const [buyToken, setBuyToken] = useState<Token | null>(dummyTokens[1]);
+  const [sellAmount, setSellAmount] = useState("1");
   const [buyAmount, setBuyAmount] = useState("20");
-  const [usdValue, setUsdValue] = useState("1000.00");
+
+  const usdPrice = getPrice(sellToken.symbol);
+  const usdValue = usdPrice ? (parseFloat(sellAmount) * usdPrice).toFixed(2) : "";
 
   return (
     <Card className="p-[8px] border-0">
@@ -27,7 +32,7 @@ export const SwapForm = () => {
         amount={sellAmount}
         onTokenChange={setSellToken}
         onAmountChange={setSellAmount}
-        usdValue={usdValue}
+        usdValue={isLoading ? "Loading..." : `${usdValue}`}
       />
       <Divider />
       <SwapInputPanel

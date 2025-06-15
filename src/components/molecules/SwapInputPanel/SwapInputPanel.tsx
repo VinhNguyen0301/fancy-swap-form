@@ -26,7 +26,7 @@ export const SwapInputPanel = ({
   onTokenChange,
 }: Props) => {
   return (
-    <Card className='p-[16px] bg-[#FFFFFF] border-[#dadee2] mb-[2px] min-h-[80px]'>
+    <Card className='p-[16px] bg-[#fffdfd] border-[#dadee2] mb-[2px] min-h-[80px]'>
       <Typography variant="label" className='text-[#131313a1]'>{label}</Typography>
 
       <div className="flex justify-between items-center">
