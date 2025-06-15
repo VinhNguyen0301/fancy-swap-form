@@ -7,7 +7,7 @@ import { Card } from "@/components/atoms/Card/Card";
 import { usePrices } from "@/hooks/usePrices";
 import { calculateBuyAmount } from "@/utils/calculate";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import { useTokenList } from "@/hooks/useTokenList";
+import { useTokenList } from '@/hooks/useTokenList';
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -20,20 +20,11 @@ export const SwapForm = () => {
   const [buyToken, setBuyToken] = useState<Token>(dummyTokens[1]);
   const [sellAmount, setSellAmount] = useState("1");
   const [buyAmount, setBuyAmount] = useState("");
-  const [error, setError] = useState("");
   const { prices, isLoading } = usePrices();
 
-  useEffect(() => {
-    if (sellToken && buyToken && prices) {
-      const calculated = calculateBuyAmount(
-        sellToken.symbol,
-        buyToken.symbol,
-        sellAmount,
-        prices
-      );
-      setBuyAmount(calculated);
-    }
-  }, [sellToken, buyToken, sellAmount, prices]);
+  const [error, setError] = useState("");
+  const [isSwapping, setIsSwapping] = useState(false);
+  const [message, setMessage] = useState("");
 
   const usdValue = prices?.[sellToken.symbol]
     ? (parseFloat(sellAmount) * prices[sellToken.symbol]).toFixed(2)
@@ -46,14 +37,38 @@ export const SwapForm = () => {
     setBuyAmount(sellAmount);
   };
 
-  // Validation logic
   const isSameToken = sellToken?.symbol === buyToken?.symbol;
   const isAmountInvalid =
     !sellAmount || isNaN(Number(sellAmount)) || Number(sellAmount) <= 0;
 
   const isDisabled =
-    isLoading || isLoadingTokenList || !sellToken || !buyToken || isSameToken || isAmountInvalid;
+    isLoading || isLoadingTokenList || isSwapping || !sellToken || !buyToken || isSameToken || isAmountInvalid;
 
+  // 👉 Update Buy Amount
+  useEffect(() => {
+    if (sellToken && buyToken && prices) {
+      const calculated = calculateBuyAmount(
+        sellToken.symbol,
+        buyToken.symbol,
+        sellAmount,
+        prices
+      );
+      setBuyAmount(calculated);
+    }
+  }, [sellToken, buyToken, sellAmount, prices]);
+
+  // 👉 Reset buy amount + message khi đổi token
+  useEffect(() => {
+    setBuyAmount("");
+    setMessage("");
+  }, [sellToken, buyToken]);
+
+  // 👉 Reset message khi user nhập lại amount
+  useEffect(() => {
+    setMessage("");
+  }, [sellAmount]);
+
+  // 👉 Validate input
   useEffect(() => {
     if (isSameToken) {
       setError("Sell and Buy tokens must be different.");
@@ -63,6 +78,16 @@ export const SwapForm = () => {
       setError("");
     }
   }, [sellToken, buyToken, sellAmount]);
+
+  // 👉 Mock submit
+  const handleSubmit = () => {
+    setIsSwapping(true);
+    setMessage("");
+    setTimeout(() => {
+      setIsSwapping(false);
+      setMessage("✅ Swap completed!");
+    }, 2000);
+  };
 
   return (
     <Card className="p-[8px] border-0">
@@ -100,12 +125,17 @@ export const SwapForm = () => {
         <p className="text-red-500 text-sm text-center my-2 text-[red]">{error}</p>
       )}
 
+      {message && (
+        <p className="text-green-600 text-sm text-center mb-2 ">{message}</p>
+      )}
+
       <Button
         variant="uniswap"
         size="lg"
         disabled={isDisabled}
+        onClick={handleSubmit}
       >
-        {isLoading ? "Loading..." : "Get started"}
+        {isSwapping ? "Swapping..." : isLoading ? "Loading..." : "Get started"}
       </Button>
     </Card>
   );
