@@ -6,6 +6,7 @@ import type { Token } from "../../../types/token";
 import { Card } from "@/components/atoms/Card/Card";
 import { usePrices } from "@/hooks/usePrices";
 import { calculateBuyAmount } from "@/utils/calculate";
+import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -35,6 +36,13 @@ export const SwapForm = () => {
     ? (parseFloat(sellAmount) * prices[sellToken.symbol]).toFixed(2)
     : "0.00";
 
+  const handleReverse = () => {
+    setSellToken(buyToken);
+    setBuyToken(sellToken);
+    setSellAmount(buyAmount);
+    setBuyAmount(sellAmount);
+  };
+
   return (
     <Card className="p-[8px] border-0">
       <SwapInputPanel
@@ -46,7 +54,17 @@ export const SwapForm = () => {
         onAmountChange={setSellAmount}
         usdValue={usdValue}
       />
-      <Divider />
+
+      <div className="flex justify-center my-3">
+        <button
+          onClick={handleReverse}
+          className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+          aria-label="Reverse swap direction"
+        >
+          <ArrowDownIcon className="w-[20px] h-[20px]" />
+        </button>
+      </div>
+
       <SwapInputPanel
         label="Buy"
         token={buyToken}
@@ -56,6 +74,7 @@ export const SwapForm = () => {
         onAmountChange={setBuyAmount}
         usdValue={usdValue}
       />
+
       <Button variant="uniswap" size="lg">
         {isLoading ? "Loading..." : "Get started"}
       </Button>
