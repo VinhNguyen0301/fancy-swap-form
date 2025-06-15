@@ -1,11 +1,11 @@
-// SwapForm.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SwapInputPanel } from "../../molecules/SwapInputPanel/SwapInputPanel";
 import { Button } from "../../atoms/Button/Button";
 import { Divider } from "../../atoms/Divider/Divider";
 import type { Token } from "../../../types/token";
 import { Card } from "@/components/atoms/Card/Card";
 import { usePrices } from "@/hooks/usePrices";
+import { calculateBuyAmount } from "@/utils/calculate";
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -13,15 +13,27 @@ const dummyTokens: Token[] = [
 ];
 
 export const SwapForm = () => {
-  const { getPrice, isLoading } = usePrices();
-
   const [sellToken, setSellToken] = useState<Token>(dummyTokens[0]);
-  const [buyToken, setBuyToken] = useState<Token | null>(dummyTokens[1]);
+  const [buyToken, setBuyToken] = useState<Token>(dummyTokens[1]);
   const [sellAmount, setSellAmount] = useState("1");
-  const [buyAmount, setBuyAmount] = useState("20");
+  const [buyAmount, setBuyAmount] = useState("");
+  const { prices, isLoading } = usePrices();
 
-  const usdPrice = getPrice(sellToken.symbol);
-  const usdValue = usdPrice ? (parseFloat(sellAmount) * usdPrice).toFixed(2) : "";
+  useEffect(() => {
+    if (sellToken && buyToken && prices) {
+      const calculated = calculateBuyAmount(
+        sellToken.symbol,
+        buyToken.symbol,
+        sellAmount,
+        prices
+      );
+      setBuyAmount(calculated);
+    }
+  }, [sellToken, buyToken, sellAmount, prices]);
+
+  const usdValue = prices?.[sellToken.symbol]
+    ? (parseFloat(sellAmount) * prices[sellToken.symbol]).toFixed(2)
+    : "0.00";
 
   return (
     <Card className="p-[8px] border-0">
@@ -32,20 +44,20 @@ export const SwapForm = () => {
         amount={sellAmount}
         onTokenChange={setSellToken}
         onAmountChange={setSellAmount}
-        usdValue={isLoading ? "Loading..." : `${usdValue}`}
+        usdValue={usdValue}
       />
       <Divider />
       <SwapInputPanel
         label="Buy"
-        token={buyToken || { symbol: "", name: "" }}
+        token={buyToken}
         tokenList={dummyTokens}
         amount={buyAmount}
         onTokenChange={setBuyToken}
         onAmountChange={setBuyAmount}
-        usdValue=""
+        usdValue={usdValue}
       />
       <Button variant="uniswap" size="lg">
-        Get started
+        {isLoading ? "Loading..." : "Get started"}
       </Button>
     </Card>
   );

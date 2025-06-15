@@ -1,25 +1,23 @@
+// hooks/usePrices.ts
 import useSWR from 'swr';
 
 type Price = {
   currency: string;
+  date: string;
   price: number;
 };
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export const usePrices = () => {
+  const fetcher = (url: string) => fetch(url).then(res => res.json());
+
   const { data, error, isLoading } = useSWR<Price[]>('https://interview.switcheo.com/prices.json', fetcher);
 
-  const getPrice = (symbol: string) => {
-    if (!data) return undefined;
-    const found = data.find((p) => p.currency === symbol);
-    return found?.price;
-  };
+  const prices: Record<string, number> = {};
+  data?.forEach(p => {
+    if (!prices[p.currency]) {
+      prices[p.currency] = p.price;
+    }
+  });
 
-  return {
-    prices: data,
-    getPrice,
-    isLoading,
-    error,
-  };
+  return { prices, isLoading, error };
 };
