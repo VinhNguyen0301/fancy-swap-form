@@ -7,7 +7,7 @@ import { Card } from "@/components/atoms/Card/Card";
 import { usePrices } from "@/hooks/usePrices";
 import { calculateBuyAmount } from "@/utils/calculate";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import { useTokenList } from '@/hooks/useTokenList';
+import { useTokenList } from "@/hooks/useTokenList";
 
 const dummyTokens: Token[] = [
   { symbol: "ETH", name: "Ethereum" },
@@ -16,11 +16,11 @@ const dummyTokens: Token[] = [
 
 export const SwapForm = () => {
   const { tokens: tokenList, isLoading: isLoadingTokenList } = useTokenList();
-  console.log('tokenList::', tokenList)
   const [sellToken, setSellToken] = useState<Token>(dummyTokens[0]);
   const [buyToken, setBuyToken] = useState<Token>(dummyTokens[1]);
   const [sellAmount, setSellAmount] = useState("1");
   const [buyAmount, setBuyAmount] = useState("");
+  const [error, setError] = useState("");
   const { prices, isLoading } = usePrices();
 
   useEffect(() => {
@@ -46,6 +46,24 @@ export const SwapForm = () => {
     setBuyAmount(sellAmount);
   };
 
+  // Validation logic
+  const isSameToken = sellToken?.symbol === buyToken?.symbol;
+  const isAmountInvalid =
+    !sellAmount || isNaN(Number(sellAmount)) || Number(sellAmount) <= 0;
+
+  const isDisabled =
+    isLoading || isLoadingTokenList || !sellToken || !buyToken || isSameToken || isAmountInvalid;
+
+  useEffect(() => {
+    if (isSameToken) {
+      setError("Sell and Buy tokens must be different.");
+    } else if (isAmountInvalid) {
+      setError("Sell amount must be greater than 0.");
+    } else {
+      setError("");
+    }
+  }, [sellToken, buyToken, sellAmount]);
+
   return (
     <Card className="p-[8px] border-0">
       <SwapInputPanel
@@ -58,10 +76,10 @@ export const SwapForm = () => {
         usdValue={usdValue}
       />
 
-      <div className="flex justify-center my-3">
+      <div className="flex justify-center my-3 relative z-10 -mt-4">
         <button
           onClick={handleReverse}
-          className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+          className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition bg-white shadow"
           aria-label="Reverse swap direction"
         >
           <ArrowDownIcon className="w-[20px] h-[20px]" />
@@ -78,7 +96,15 @@ export const SwapForm = () => {
         usdValue={usdValue}
       />
 
-      <Button variant="uniswap" size="lg">
+      {error && (
+        <p className="text-red-500 text-sm text-center my-2 text-[red]">{error}</p>
+      )}
+
+      <Button
+        variant="uniswap"
+        size="lg"
+        disabled={isDisabled}
+      >
         {isLoading ? "Loading..." : "Get started"}
       </Button>
     </Card>
