@@ -19,7 +19,7 @@ export const SwapForm = () => {
   const [usdValue, setUsdValue] = useState("1000.00");
 
   return (
-    <Card className="p-[8px]">
+    <Card className="p-[8px] border-0">
       <SwapInputPanel
         label="Sell"
         token={sellToken}

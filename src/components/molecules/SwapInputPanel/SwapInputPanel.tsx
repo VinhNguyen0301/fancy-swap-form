@@ -26,8 +26,8 @@ export const SwapInputPanel = ({
   onTokenChange,
 }: Props) => {
   return (
-    <Card className='p-[16px] bg-[#FFFFFF]'>
-      <Typography variant="label">{label}</Typography>
+    <Card className='p-[16px] bg-[#FFFFFF] border-[#dadee2] mb-[2px] min-h-[80px]'>
+      <Typography variant="label" className='text-[#131313a1]'>{label}</Typography>
 
       <div className="flex justify-between items-center">
         <InputAmount value={amount} onChange={onAmountChange} />
@@ -39,7 +39,7 @@ export const SwapInputPanel = ({
       </div>
 
       {usdValue && (
-        <Typography variant="subtle" className='text-sm text-gray-400 mt-1 text-[#131313A0]'>${usdValue}</Typography>
+        <Typography variant="subtle" className='text-[12px] text-gray-400 mt-1 text-[#131313A0]'>${usdValue}</Typography>
       )}
     </Card>
   );

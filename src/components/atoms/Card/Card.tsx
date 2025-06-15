@@ -11,7 +11,7 @@ export const Card = ({ children, className = '' }: Props) => {
   return (
     <div
       className={clsx(
-        ' rounded-[12px] border-red-50 border border-[#dadee2]  shadow-lg max-w-2xl mx-auto space-y-4',
+        ' rounded-[12px] border border-[#dadee2] shadow-lg max-w-2xl mx-auto space-y-4',
         className
       )}
     >

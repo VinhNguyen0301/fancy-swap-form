@@ -10,7 +10,7 @@ type TypographyProps = {
 };
 
 const baseStyles: Record<Variant, string> = {
-  heading1: 'text-5xl font-bold text-black',
+  heading1: 'h1 font-bold text-black mb-[10px] text-[50px]',
   title: 'text-2xl font-semibold text-black',
   label: 'text-sm font-medium text-gray-700',
   caption: 'text-xs text-gray-400',

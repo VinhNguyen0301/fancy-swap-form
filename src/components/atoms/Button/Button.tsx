@@ -22,7 +22,7 @@ const variants = {
   secondary:
     "text-gray-800 bg-transparent shadow-inner border border-gray-300 hover:bg-gray-100 rounded-full",
   uniswap:
-    "text-[#ff007a] bg-[#fdd6f4] hover:bg-[#fac7f0] rounded-[20px] flex flex-1 border-0 justify-center", // giữ như bạn custom
+    "text-[#FF37C7] bg-[#FFF3FC] hover:bg-[#fac7f0] rounded-[20px] flex flex-1 border-0 justify-center mt-[2px]", // giữ như bạn custom
 };
 
 export const Button = ({
