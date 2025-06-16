@@ -87,6 +87,7 @@ fancy-swap-form/
 │   ├── hooks/                     # Custom React hooks
 │   ├── utils/                     # Utility functions (e.g., price calculator)
 │   ├── types/                     # TypeScript type definitions
+|   |── problems/                  # Resolve 2 probems sum and messy react
 │   └── index.tsx                  # Entry point
 ├── .storybook/                    # Storybook configuration
 ├── tsconfig.json
