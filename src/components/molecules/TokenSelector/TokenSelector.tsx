@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import { TokenIcon } from '../../atoms/TokenIcon/TokenIcon';
-import { Typography } from '../../atoms/Typography/Typography';
-import clsx from 'clsx';
-import { ChevronDownIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { TokenSelectorModal } from '@/components/organisms/TokenSelectorModal/TokenSelectorModal';
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
+import React, { useState } from "react";
+import { TokenIcon } from "../../atoms/TokenIcon/TokenIcon";
+import { Typography } from "../../atoms/Typography/Typography";
+import clsx from "clsx";
+import {
+  ChevronDownIcon,
+  ExclamationTriangleIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
+import { TokenSelectorModal } from "@/components/organisms/TokenSelectorModal/TokenSelectorModal";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
 
 export type Token = {
   symbol: string;
@@ -17,7 +26,11 @@ type TokenSelectorProps = {
   onSelect: (token: Token) => void;
 };
 
-export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorProps) => {
+export const TokenSelector = ({
+  selected,
+  tokenList,
+  onSelect,
+}: TokenSelectorProps) => {
   const [open, setOpen] = useState(false);
 
   const handleSelect = (token: Token) => {
@@ -29,14 +42,14 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
     <div className="relative w-max">
       <button
         onClick={() => {
-          console.log('Opening modal');
+          console.log("Opening modal");
           setOpen(true);
         }}
         className="flex items-center gap-2 bg-[white] text-[#ff007a] px-4 py-2 rounded-xl font-semibold hover:bg-[#fac7f0] rounded-[999999px] pt-[2px] pb-[2px] border border-[#dadee2]"
       >
         <TokenIcon symbol={selected.symbol} size={28} />
-        <span className='ml-[6px] text-[16px] text-[#131313]'>
-        <Typography variant="label">{selected.symbol}</Typography>
+        <span className="ml-[6px] text-[16px] text-[#131313]">
+          <Typography variant="label">{selected.symbol}</Typography>
         </span>
         <ChevronDownIcon className="w-[20px] h-[20px] text-[gray] ml-[4px]" />
       </button>
@@ -45,10 +58,17 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
           <div className="bg-white rounded-xl p-6 shadow-xl w-full max-w-md">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Select a token</h2>
-              <button onClick={() => setOpen(false)}>✕</button>
+              <Typography>Select a token</Typography>
+              <button
+                onClick={() => setOpen(false)}
+                className="text-gray-500 hover:text-black"
+              >
+                ✕
+              </button>
             </div>
-            <div className="space-y-2">
+
+            {/* Scrollable token list */}
+            <div className="max-h-[200px] overflow-y-auto pr-1 custom-scrollbar space-y-2">
               {tokenList.map((token) => (
                 <button
                   key={token.symbol}
@@ -56,7 +76,7 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
                   onClick={() => handleSelect(token)}
                 >
                   <TokenIcon symbol={token.symbol} size={20} />
-                  <span>{token.name}</span>
+                  <span className="ml-[10px]">{token.name}</span>
                 </button>
               ))}
             </div>
@@ -71,7 +91,7 @@ export const TokenSelector = ({ selected, tokenList, onSelect }: TokenSelectorPr
         onSelect={handleSelect}
       /> */}
 
-{/* <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50" static>
+      {/* <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50" static>
   <div className="fixed inset-0 bg-black/30" />
   <div className="fixed inset-0 flex items-center justify-center">
     <DialogPanel className="bg-white rounded-xl p-4 shadow-xl w-full max-w-md">

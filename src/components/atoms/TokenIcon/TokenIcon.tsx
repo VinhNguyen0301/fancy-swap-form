@@ -2,7 +2,7 @@ import React from "react";
 import clsx from "clsx";
 
 type TokenIconProps = {
-  symbol: string; // ví dụ: 'ETH', 'USDC'
+  symbol: string; 
   size?: number;
   className?: string;
 };
@@ -14,7 +14,7 @@ export const TokenIcon = ({
 }: TokenIconProps) => {
   return (
     <img
-      src={`/assets/tokens/ETH.svg`}
+      src={`/assets/tokens/${symbol}.svg`}
       alt={symbol}
       width={size}
       height={size}
