@@ -1,54 +1,121 @@
-# React + TypeScript + Vite
+# 💱 Fancy Swap Form – React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful and interactive currency swap form built with modern frontend technologies. Inspired by [Uniswap](https://uniswap.org/), this project demonstrates clean UI design, token swapping logic, and animation effects – all within a professional frontend architecture.
 
-Currently, two official plugins are available:
+### 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 [https://fancy-swap-form-nicl.vercel.app/](https://fancy-swap-form-nicl.vercel.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+* **React 18** + **TypeScript**
+* **Vite** – lightning-fast build tool
+* **Tailwind CSS** – utility-first styling
+* **Headless UI** – accessible UI components
+* **Heroicons** – SVG icon system
+* **SWR** – data fetching library
+* **Storybook** – component explorer
+* **Vercel** – deployment platform
+
+---
+
+## 📦 Installation & Development
+
+### 1. Clone the project
+
+```bash
+git clone https://github.com/VinhNguyen0301/fancy-swap-form.git
+cd fancy-swap-form
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+yarn
 ```
+
+### 3. Start the development server
+
+```bash
+yarn dev
+```
+
+Visit: `http://localhost:5173`
+
+---
+
+## 📕 Storybook – Component Explorer
+
+```bash
+yarn storybook
+```
+
+Opens Storybook at `http://localhost:6006`
+
+---
+
+## 🏗 Build for Production
+
+```bash
+yarn build
+```
+
+Output will be generated in the `dist/` directory.
+
+To preview the production build locally:
+
+```bash
+yarn preview
+```
+
+---
+
+## 📁 Folder Structure Overview
+
+```
+fancy-swap-form/
+├── public/                         # Static assets (includes token icons)
+│   └── assets/tokens/             # Local token SVG logos
+├── src/
+│   ├── components/
+│   │   ├── atoms/                 # Basic UI elements
+│   │   ├── molecules/             # Combined smaller components
+│   │   ├── organisms/             # Logical sections like SwapForm
+│   │   ├── templates/             # Page layout
+│   ├── hooks/                     # Custom React hooks
+│   ├── utils/                     # Utility functions (e.g., price calculator)
+│   ├── types/                     # TypeScript type definitions
+│   └── index.tsx                  # Entry point
+├── .storybook/                    # Storybook configuration
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+```
+
+---
+
+## ✅ Features
+
+* 🔁 Swap between any two tokens (with validation)
+* ⬆️ Reverse Buy/Sell tokens instantly
+* 💵 Live price conversion from JSON API
+* 🔍 Modal with search and scrollable token list
+* 🧪 Integrated Storybook component system
+* 🌌 Animated particle background (Uniswap-style)
+* ✅ Clean design & responsive layout
+
+---
+
+## 📝 Notes
+
+* Token price API: [`https://interview.switcheo.com/prices.json`](https://interview.switcheo.com/prices.json)
+* Token logos are served from local folder `/public/assets/tokens`
+* Project deployed on Vercel with Vite as framework
+
+---
+
+## 📜 License
+
+This project is open-source and created for educational & technical evaluation purposes only.
