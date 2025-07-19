@@ -1,4 +1,3 @@
-import "./App.css";
 import { Card } from "./components/atoms/Card/Card";
 import { Hero } from "./components/organisms/HeroSection/HeroSection";
 import { SwapForm } from "./components/organisms/SwapForm/SwapForm";
@@ -7,10 +6,10 @@ import { SwapPageLayout } from "./components/templates/SwapPageLayout/SwapPageLa
 function App() {
   return (
     <SwapPageLayout>
-        <Hero />
-        <Card>
-          <SwapForm />
-        </Card>
+      <Hero />
+      <Card>
+        <SwapForm />
+      </Card>
     </SwapPageLayout>
   );
 }
